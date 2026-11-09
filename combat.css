@@ -1,0 +1,43 @@
+/* v0.7: cartoon-fantasy action HUD and crisp hand-painted sprite renderer. */
+:root { --combat-edge:#9e7545; --combat-ink:#271f28; --combat-gold:#f1ce77; }
+.topbar {
+  background:linear-gradient(180deg,#29232d,#1b1a23);
+  border-bottom:3px solid #aa7a43;
+  box-shadow:0 5px 22px #0c171c52;
+}
+.brand h1{color:#fff5dc;text-shadow:0 2px #101018}
+.brand h1 em{color:#e8bf73}
+.brand-sub{color:#b8aba3}
+.brand-mark{border:2px solid #e7ba71;background:linear-gradient(160deg,#553f34,#2d272f);box-shadow:0 0 0 2px #14161a,inset 0 1px #e9cca080;border-radius:9px}
+.top-resources span,.top-resources span:first-child,.top-resources span:last-child{
+  background:linear-gradient(#302e34,#1d2129);color:#f1d991;border:2px solid #8b6a3e;
+  border-radius:9px;box-shadow:inset 0 0 0 1px #4e4443,0 2px #151821;
+  font-weight:900;text-shadow:0 1px #101018;
+}
+.top-resources span:last-child{color:#d4aef9}
+.top-settings{background:linear-gradient(#4a4140,#2a2b32);border:2px solid #9a784b;color:#ffefc8;border-radius:8px}
+.game-toolbar{
+  background:linear-gradient(#343039,#1e2028);
+  border:3px solid #ac8148;border-bottom:2px solid #2d2b30;
+  box-shadow:inset 0 2px #67523d,0 5px 20px #171b1c4a;
+  padding:9px 16px;min-height:64px;border-radius:12px 12px 0 0;
+}
+.world-label{color:#fff5d5;font-family:Georgia,serif;font-weight:900;text-shadow:0 2px #0e1015;font-size:18px}
+.subtle{color:#c7ba9c}
+.toolbar-right{color:#f8df9b}
+#runTimer{font-size:22px;color:#ffffff;font-weight:1000;font-variant-numeric:tabular-nums;text-shadow:0 2px #0e1015}
+.tag{color:#fff0ba;background:#3a3337;border:1px solid #9c7849;padding:7px 11px;border-radius:6px}
+.auto-tag{color:#b4f7c0;background:#294235;border:1px solid #5ca773;padding:7px 10px;border-radius:6px;box-shadow:none}
+.canvas-holder{background:#bda164;border:3px solid #2e292e;border-top:0;border-bottom:0;box-shadow:0 0 0 1px #ac8153,0 16px 30px #2e272640}
+.canvas-holder::after{border:1px solid #c9a365a8;box-shadow:inset 0 0 26px #2d202817}
+#game{image-rendering:auto; width:100%; height:100%;}
+.scene-map-label,.scene-run-info{background:linear-gradient(#302a33f5,#1b1d24f5);color:#ffe2a0;border:2px solid #bd955e;box-shadow:0 3px #16171990,0 6px 14px #1b191c76;border-radius:5px;text-shadow:0 1px #0b0b0f;font-size:12px;letter-spacing:.04em}
+.scene-map-label{border-left:5px solid #e0b665}
+.scene-run-info{border-right:5px solid #e0b665}
+.below-canvas{border-color:#b99b75;border-top:0}
+.run-progress-track{height:10px;border:2px solid #3b2e2b;border-radius:5px;background:#26262e;box-shadow:inset 0 2px #161921}
+.run-progress-track>div{background:linear-gradient(#ffdc62,#bd8e24);box-shadow:inset 0 1px #fff5be}
+.hero-portrait{background:#28343b url('assets/mage.svg') center 44% / 105% auto no-repeat;border:2px solid #b78f59;border-radius:8px;box-shadow:inset 0 0 9px #111821}
+.hero-portrait .portrait-art,.hero-portrait .portrait-spark{display:none}
+.float-notice{color:#fff0a8;font-weight:900;-webkit-text-stroke:.4px #241c22;text-shadow:0 2px #161821,0 0 12px #e69a23}
+@media(max-width:650px){.game-toolbar{min-height:56px;padding:8px}.world-label{font-size:14px}#runTimer{font-size:17px}.scene-map-label,.scene-run-info{font-size:9px;padding:5px}}

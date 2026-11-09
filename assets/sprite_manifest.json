@@ -1,0 +1,30 @@
+{
+  "cell": 128,
+  "frames": [
+    "idle",
+    "walk-a",
+    "walk-b",
+    "attack"
+  ],
+  "rows": {
+    "mage": 0,
+    "goblin": 1,
+    "spider": 2,
+    "mushroom": 3,
+    "cultist": 4,
+    "skeleton": 5,
+    "wraith": 6,
+    "bat": 7,
+    "scorpion": 8,
+    "raider": 9,
+    "ent": 10,
+    "lich": 11,
+    "colossus": 12,
+    "pine": 13,
+    "grave": 14,
+    "torch": 15,
+    "rock": 16,
+    "bush": 17
+  },
+  "anchor": "center/feet"
+}

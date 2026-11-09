@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f9f8ed">
+<meta name="description" content="Chronicles of the Rift – autonomní pixel art survivors RPG. Výpravy, loot, talenty a prestige. Bez serveru.">
+<title>Chronicles of the Rift · Idle Survivors</title>
+<link rel="stylesheet" href="style.css?v=0.9.4">
+<link rel="stylesheet" href="storybook.css?v=0.9.4">
+<link rel="stylesheet" href="combat.css?v=0.9">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">✦</div><div><h1>CHRONICLES <em>OF THE RIFT</em></h1><div class="brand-sub">IDLE SURVIVORS · SHARP & STABLE 0.9.4</div></div></div>
+    <div class="top-resources"><span id="topGold">◈ 0 zlata</span><span id="topEssence">✧ 0 esencí</span><span id="topAstral">✦ 0 ozvěn</span><span id="topRuneshards">◇ 0 úlomků run</span></div>
+    <div class="top-actions"><button id="themeToggle" class="ghost theme-toggle" data-action="toggle-theme" type="button" aria-pressed="false">🌙 Tmavý režim</button><button class="ghost top-settings" data-panel="settings" type="button">⚙ Nastavení a data</button></div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar leftbar">
+      <div class="section-title">HRDINA <span id="heroLevel">ÚROVEŇ 1</span></div>
+      <div class="hero-card"><div class="hero-portrait"><span id="classIcon" class="portrait-art">♜</span><span class="portrait-spark">✦</span></div><div><b id="heroClassName">Arkanista</b><small id="heroClassDesc">Průzkumník trhlin</small><span class="muted mini">Mistrovství lvl <b id="accountLevel">1</b> · Třída lvl <b id="classLevel">1</b> · Prestige <b id="prestigeCount">0</b></span></div></div>
+      <div class="stat-head"><span>Životy</span><span id="hpText">100 / 100</span></div><div class="meter red"><div id="hpBar"></div></div>
+      <div class="stat-head"><span>XP výpravy</span><span id="xpText">0 / 20</span></div><div class="meter blue"><div id="xpBar"></div></div>
+      <div class="stat-head"><span>Mistrovství postavy</span><span id="masteryText">0 / 100</span></div><div class="meter gold"><div id="masteryBar"></div></div>
+      <div class="stat-block" id="statsList"></div>
+      <div class="section-title with-gap">SCHOPNOSTI <span id="skillCount">0</span></div>
+      <div id="skillList" class="skill-list"></div>
+      <div class="section-title with-gap">POSLEDNÍ UDÁLOSTI</div>
+      <div class="event-feed" id="eventFeed"><p>Vstup do trhliny a začni svou první výpravu.</p></div>
+    </aside>
+    <main class="game-wrap">
+      <div class="game-toolbar"><div><span class="world-label" id="mapTitle">Šeptající hvozd</span><span class="subtle" id="runState">Připraven k výpravě</span></div><div class="toolbar-right"><span id="runTimer">00:00</span><span class="tag" id="waveTag">VLNA 1</span><span class="auto-tag">● AUTO</span></div></div>
+      <div class="canvas-holder" id="canvasHolder"><canvas id="game" width="960" height="600" aria-label="Kreslená fantasy herní scéna"></canvas><div class="scene-map-label" id="sceneMapLabel">✦ Šeptající hvozd</div><div class="scene-run-info" id="sceneRunInfo">PŘIPRAVEN K VÝPRAVĚ</div><div id="bossHud" class="boss-hud" hidden></div><div id="skillHud" class="skill-hud" aria-label="Přehled kouzel"></div>
+        <div class="float-notice" id="floatNotice" aria-live="polite"></div>
+        <div class="pause-overlay" id="pauseOverlay"><div class="pause-emblem">✧</div><h2>Brána čeká na poutníka</h2><p>Hrdina se sám pohybuje, bojuje a sbírá zkušenosti. Ty řídíš jeho vývoj.</p><button type="button" class="primary big" id="startBtn">⚔ Zahájit výpravu</button><small>Vyber mapu pod herním oknem.</small><div id="hubWorldUi" class="hub-world-ui" aria-label="Vesnice"><div id="hubZones" class="hub-zones"></div><div id="hubPlayer" class="hub-player" aria-label="Hrdina v hubu">♜</div><div class="hub-console"><div><b id="hubZoneName">Portál</b><small id="hubZoneHint">Klikni na místo nebo použij WASD / šipky. Enter otevře vybrané místo.</small></div><button id="hubInteract" type="button" class="hub-interact" data-action="hub-interact">Navštívit</button></div><nav id="hubFastTravel" class="hub-fast-travel" aria-label="Rychlé cestování"></nav></div></div>
+      </div>
+      <div class="below-canvas"><div class="run-progress"><div class="run-progress-track"><div id="runProgressFill"></div></div><div class="run-progress-label"><span id="runProgressLabel">Připraveno</span><span id="runLengthHint">Boss každé 2 min · dokončení po 20 min</span></div></div>
+        <div class="control-strip"><button id="pauseBtn" type="button" class="secondary">Ⅱ Pozastavit</button><button id="retreatBtn" type="button" class="secondary danger-outline">↩ Ukončit výpravu</button><button id="autoBtn" type="button" class="secondary">⚡ Automatický výběr: zapnut</button><button data-panel="build" class="secondary" type="button">✧ Build</button></div>
+      </div>
+      <section class="maps-section"><div class="section-title">VÝBĚR OBLASTI <span>Po prvním vítězství stoupne obtížnost; druhé vítězství odemkne další oblast.</span></div><div class="difficulty-control"><label for="difficultySelect">Obtížnost výpravy<select id="difficultySelect"></select></label><p id="difficultyDescription">Základní obtížnost pro první výpravy.</p><p id="difficultyModifiers"></p></div><div class="weekly-challenge"><div><strong>⚑ Týdenní zkouška</strong><p id="weeklyChallengeInfo">Každý týden nové pravidlo a místní rekord.</p></div><button id="weeklyRunBtn" class="small-btn" data-action="weekly" type="button">⚔ Spustit výzvu</button><button class="small-btn" data-action="weekly-export" type="button">↧ Export karty</button></div><div class="weekly-challenge rift-challenge"><div><strong>⌘ Nekonečná Astrální trhlina</strong><p id="riftChallengeInfo">Zamčená — klíč odemkneš v Astrálním stromu.</p></div><button id="riftRunBtn" class="small-btn" data-action="rift" type="button">🔒 Zamčeno</button></div><div id="mapCards" class="map-cards"></div><div class="weekly-challenge gauntlet-challenge"><div><strong>⚔ Bossová zkouška</strong><p id="gauntletInfo">Deset bossů za sebou: po každém vyber požehnání a kletbu.</p></div><button id="gauntletRunBtn" class="small-btn" data-action="gauntlet" type="button">🔒 Odemkne se po vítězství v Katakombách</button></div></section>
+    </main>
+    <aside class="sidebar rightbar"><div class="section-title">KRONIKA POSTAVY</div><div class="action-grid"><button class="action-btn" data-panel="classes" type="button"><span>♜</span>Třídy</button><button class="action-btn" data-panel="equipment" type="button"><span>⚔</span>Výbava</button><button class="action-btn" data-panel="inventory" type="button"><span>▣</span>Inventář <small id="invCount">0</small></button><button class="action-btn" data-panel="talents" type="button"><span>✦</span>Talenty <small id="talentPoints">0</small></button><button class="action-btn" data-panel="prestige" type="button"><span>◈</span>Prestige</button><button class="action-btn" data-panel="collection" type="button"><span>♧</span>Bestiář</button><button class="action-btn" data-panel="achievements" type="button"><span>🏅</span>Achievementy</button><button class="action-btn" data-panel="merchant" type="button"><span>◈</span>Kupec</button><button class="action-btn" data-panel="settings" type="button"><span>⚙</span>Automatizace</button></div>
+      <div class="section-title with-gap">AUTOMATIZAČNÍ PROFIL</div><div class="box-panel"><label for="buildPreset">Styl boje a výběru kouzel</label><select id="buildPreset"><optgroup label="Doporučené profily"><option value="safe">🛡 Bezpečný farmář</option><option value="push">⚔ Průlom trhlinou</option><option value="boss">☠ Lovec bossů</option><option value="loot">✧ Sběrač relikvií</option><option value="experiment">❖ Experimentátor</option></optgroup><optgroup label="Další archetypy"><option value="summoner">♧ Pán přivolání</option><option value="melee">⚔ Bojovník zblízka</option><option value="ranger">➶ Lovec na dálku</option><option value="tank">⬟ Nezlomný strážce</option><option value="hybrid">✦ Univerzální poutník</option><option value="trapper">⌘ Runový pastičkář</option><option value="idle">◷ Klidný farmář</option></optgroup><optgroup label="Původní buildy"><option value="storm">⚡ Vládce bouře</option><option value="frost">❄ Ledový arkanista</option><option value="fire">🔥 Pyromant</option><option value="balanced">✦ Vyvážený mág</option></optgroup></select><p class="hint" id="buildHint"></p></div>
+      <div class="section-title with-gap">STATISTIKY VÝPRAVY</div><div class="box-panel small-stats"><div><span>Zabití nepřátelé</span><b id="killStat">0</b></div><div><span>Sesbírané zlato</span><b id="runGoldStat">0</b></div><div><span>Dokončené výpravy</span><b id="winsStat">0</b></div><div><span>Nejvyšší vlna</span><b id="bestWaveStat">1</b></div></div>
+      <div class="section-title with-gap">JAK TO FUNGUJE</div><div class="box-panel tips"><p><b>Výpravy</b> mají 20 minut a každé 2 minuty přichází nový boss. Po jeho porážce boj pokračuje.</p><p><b>Třídy</b> mají vlastní startovní kouzlo a pasivní bonusy. Mistrovství třídy roste hraním za ni; milníky jsou na úrovních 10–50.</p><p><b>Další mapa</b> se odemkne po dvou vítězstvích v předchozí oblasti. Pokud zemřeš, získaný loot a vývoj postavy zůstávají.</p><p><b>Týdenní zkouška</b> používá Hvozd na T1 s pevnou třídou, dvěma pravidly a dvěma zakázanými kouzly odvozenými z ISO týdne.</p><p><b>Loot:</b> loot se zlepšuje s postupem oblastmi a jejich tiery; legendární kusy mají 22 různých mechanických efektů.</p><p><b>Smrt</b> ukončí výpravu, ale loot, zlato a mistrovství zůstávají.</p><p><b>Nový run</b> resetuje dočasná kouzla, takže si můžeš sestavit jiný build.</p><p><b>Prestige</b> je dobrovolný reset dlouhodobého postupu za trvalé bonusy.</p></div>
+    </aside>
+  </div>
+  <footer class="footer"><span>Ukládání: <b id="saveState">LocalStorage · čeká</b></span><span>Bez serveru · GitHub Pages / VPS · <span id="fpsStat">60 FPS</span></span><button id="exportFooter" class="link-btn" type="button">↓ Export uložené hry</button></footer>
+</div>
+<div class="modal-backdrop hidden" id="modalBackdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><header class="modal-head"><div><small id="modalEyebrow">KRONIKA</small><h2 id="modalTitle">Nastavení</h2></div><button id="modalClose" class="close-btn" type="button" aria-label="Zavřít dialog">✕</button></header><div id="modalContent" class="modal-content"></div></div></div>
+<input id="importInput" type="file" accept=".json,application/json" hidden>
+<script src="game.js?v=0.9.4" defer></script>
+</body>
+</html>
+
